@@ -1,7 +1,7 @@
 from PIL import Image
 
-ASCII_CHARS = ["$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'.", " .:-=+*#%@", "@%#*+=-;:. "]
-#First set is detailed, second two are flipped versions of each other.
+ASCII_CHARS = [" .:-=+*#%@", "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'.", "@%#*+=-;:. "]
+#1 and 3 are flipped versions of each other.
 CHARSET = 0
 WIDTH = 120
 
