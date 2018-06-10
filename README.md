@@ -5,6 +5,13 @@ This is a simple text-based Python program to convert images into ASCII represen
 
 It relies on PIL(Pillow), but otherwise nothing else. 
 
-<b>Examples:</b>
+<b>Features:</b>
+<ul>
+  <li>Convert images to ASCII</li>
+  <li>Customise the image size and character representation</li>
+  <li>Save ASCII images to text files</li>
+</ul>
+
+<b>Example output:</b>
 <br />
 ![Jaws](/Examples/jaws.png)
