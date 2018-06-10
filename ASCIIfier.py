@@ -4,6 +4,7 @@ ASCII_CHARS = [" .:-=+*#%@", "@%#*+=-;:. ", "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvun
 #1 and 2 are flipped versions of each other.
 CHARSET = 0
 WIDTH = 120
+ASCII_IMG = []
 
 def greyscale(img):
     return img.convert("L")
@@ -50,14 +51,23 @@ def can_int(x):
     except:
         return False
 
+def save_img(img, filename):
+    file = open(filename + ".txt", "w")
+    file.write(img)
+    print("File saved successfully.")
+
 def help():
     print("ASCIIfier HELP:")
     print("Enter the name of an image file (plus extension) and then press 'Enter.'")
     print("The program will output your ASCIIfied image.")
     print("Enter '$width ' and then a number to change the default width.")
-    print("Enter '$charset ' and then a number to change the default charset.") 
+    print("Enter '$charset ' and then a number to change the default charset.")
+    print("Enter '$save ' and then a name to save the most recent image.")
 
 def main():
+    global ASCII_IMG #I know global variables are frowned upon, but given the small size and limited
+    #purpose of this program, I think it's excusable in the 3 places they appear.
+    
     print("###############################")
     print("#        THE ASCIIFIER        #")
     print("###############################")
@@ -71,19 +81,26 @@ def main():
         command = input(">")    
         if command[0] == "$":
             command = command.split(" ")
-            print(command[1])
             if len(command) > 1 and can_int(command[1]):
                 if command[0] == "$width":
                     set_width(int(command[1]))
                 elif command[0] == "$charset":
                     set_charset(int(command[1]))
+            elif command[0] == "$save":
+                if len(command) > 1 and len(ASCII_IMG) > 0:
+                    save_img(ASCII_IMG, command[1])
+                elif len(ASCII_IMG) == 0:
+                    print("ERROR: No image to save.")
+                elif len(command) == 1:
+                    print("ERROR: No filename provided.")
             elif command[0] == "$help":
                 help()    
             else:
                 print("Invalid command.")
         else:
             try:
-                print(ASCIIfy_image(command, ASCII_CHARS[CHARSET], WIDTH))
+                ASCII_IMG = ASCIIfy_image(command, ASCII_CHARS[CHARSET], WIDTH)
+                print(ASCII_IMG)
             except:
                 print("ERROR: Unable to convert", command)
         print()
