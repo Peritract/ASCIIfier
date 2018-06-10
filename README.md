@@ -5,4 +5,4 @@ I wrote this based on an article by Praveen Kumar (https://www.hackerearth.com/p
 
 It relies on PIL(Pillow), but otherwise nothing else. 
 
-![Jaws](/Examples/Jaws.jpg)
+![Jaws](/Examples/jaws.png)
