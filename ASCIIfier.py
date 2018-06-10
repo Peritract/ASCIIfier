@@ -1,10 +1,13 @@
 from PIL import Image
 
-ASCII_CHARS = [" .:-=+*#%@", "@%#*+=-;:. ", "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'."]
-#1 and 2 are flipped versions of each other.
-CHARSET = 0
-WIDTH = 120
-ASCII_IMG = []
+holders = { #Storage for things everything needs access to. 
+    "ASCII_CHARS":[" .:-=+*#%@", "@%#*+=-;:. ", "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,^`'."],
+    #0 and 1 are flipped versions of each other. 2 is more complex.
+    "CHARSET": 0,
+    "WIDTH": 120,
+    "ASCII_IMG":[]
+}
+
 
 def greyscale(img):
     return img.convert("L")
@@ -30,18 +33,20 @@ def ASCIIfy_image(path, chars, width=150):
     n_img = [chars[index: index + width] for index in range(0, len(chars), width)]
     return "\n".join(n_img)
 
-def set_width(width):
-    global WIDTH
-    WIDTH = int(width)
-    print("Width has been set to", str(width) + ".")
+def set_width(store, width):
+    if width > 0:
+        print("Width has been set to", str(width) + ".")
+        return width
+    else:
+        return store["WIDTH"]
 
-def set_charset(num):
-    global CHARSET
-    if len(ASCII_CHARS) - 1 >= num:
-        CHARSET = num
+def set_charset(store, num):
+    if len(store["ASCII_CHARS"]) - 1 >= num:
         print("Charset has been set to", str(num) + ".")
+        return num
     else:
         print("No such charset found.")
+        return store["CHARSET"]
 
 def can_int(x):
     #helper function - checks if something can be an integer
@@ -64,10 +69,7 @@ def help():
     print("Enter '$charset ' and then a number to change the default charset.")
     print("Enter '$save ' and then a name to save the most recent image.")
 
-def main():
-    global ASCII_IMG #I know global variables are frowned upon, but given the small size and limited
-    #purpose of this program, I think it's excusable in the 3 places they appear.
-    
+def main(store):
     print("###############################")
     print("#        THE ASCIIFIER        #")
     print("###############################")
@@ -83,13 +85,13 @@ def main():
             command = command.split(" ")
             if len(command) > 1 and can_int(command[1]):
                 if command[0] == "$width":
-                    set_width(int(command[1]))
+                    store["WIDTH"] = set_width(store, int(command[1]))
                 elif command[0] == "$charset":
-                    set_charset(int(command[1]))
+                    store["CHARSET"] = set_charset(store, int(command[1]))
             elif command[0] == "$save":
-                if len(command) > 1 and len(ASCII_IMG) > 0:
-                    save_img(ASCII_IMG, command[1])
-                elif len(ASCII_IMG) == 0:
+                if len(command) > 1 and len(store["ASCII_IMG"]) > 0:
+                    save_img(store["ASCII_IMG"], command[1])
+                elif len(store["ASCII_IMG"]) == 0:
                     print("ERROR: No image to save.")
                 elif len(command) == 1:
                     print("ERROR: No filename provided.")
@@ -99,11 +101,11 @@ def main():
                 print("Invalid command.")
         else:
             try:
-                ASCII_IMG = ASCIIfy_image(command, ASCII_CHARS[CHARSET], WIDTH)
-                print(ASCII_IMG)
+                store["ASCII_IMG"] = ASCIIfy_image(command, store["ASCII_CHARS"][store["CHARSET"]], store["WIDTH"])
+                print(store["ASCII_IMG"])
             except:
                 print("ERROR: Unable to convert", command)
         print()
 
 if __name__ == "__main__":
-    main()
+    main(holders)
