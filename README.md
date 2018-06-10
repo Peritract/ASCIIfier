@@ -1,8 +1,9 @@
-# ASCIIfier
-Convert images to ASCII
+<h1>ASCIIfier</h1>
+<h1>Convert images to ASCII</h4>
 
-I wrote this based on an article by Praveen Kumar (https://www.hackerearth.com/practice/notes/beautiful-python-a-simple-ascii-art-generator-from-images/), but I have extended and altered it. That's not to say I've made it better, but just to say that I haven't simply stolen his code.
+This is a simple text-based Python program to convert images into ASCII representations. I am indebted to [Praveen Kumar's tutorial on this](https://www.hackerearth.com/practice/notes/beautiful-python-a-simple-ascii-art-generator-from-images/), which I used as a starting point. 
 
 It relies on PIL(Pillow), but otherwise nothing else. 
 
+<b>Examples:</b> 
 ![Jaws](/Examples/jaws.png)
