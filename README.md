@@ -1,5 +1,5 @@
 <h1>ASCIIfier</h1>
-<h1>Convert images to ASCII</h4>
+<h4>Convert images to ASCII</h4>
 
 [![HitCount](http://hits.dwyl.io/peritract/asciifier.svg)](http://hits.dwyl.io/peritract/asciifier)
 
